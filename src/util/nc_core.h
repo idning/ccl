@@ -40,11 +40,11 @@
 # define NC_STATS 0
 #endif
 
-#ifdef HAVE_EPOLL
+#ifdef __linux__
 # define NC_HAVE_EPOLL 1
-#elif HAVE_KQUEUE
+#elif (defined(__APPLE__) && defined(MAC_OS_X_VERSION_10_6)) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined (__NetBSD__)
 # define NC_HAVE_KQUEUE 1
-#elif HAVE_EVENT_PORTS
+#elif defined(__sun)
 # define NC_HAVE_EVENT_PORTS 1
 #else
 # error missing scalable I/O event notification mechanism
@@ -99,17 +99,12 @@ struct event_base;
 #include <sys/time.h>
 #include <netinet/in.h>
 
-#include <nc_array.h>
-#include <nc_string.h>
-#include <nc_queue.h>
-#include <nc_rbtree.h>
-#include <nc_log.h>
-#include <nc_util.h>
-#include <event/nc_event.h>
-#include <nc_stats.h>
-#include <nc_mbuf.h>
-#include <nc_message.h>
-#include <nc_connection.h>
+#include "nc_array.h"
+//#include "nc_string.h"
+#include "nc_queue.h"
+#include "nc_log.h"
+#include "nc_util.h"
+#include "nc_event.h"
 
 struct context {
     uint32_t           id;          /* unique context id */

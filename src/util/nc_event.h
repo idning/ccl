@@ -18,7 +18,7 @@
 #ifndef _NC_EVENT_H_
 #define _NC_EVENT_H_
 
-#include <nc_core.h>
+#include "nc_core.h"
 
 #define EVENT_SIZE  1024
 

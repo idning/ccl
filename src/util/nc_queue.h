@@ -50,7 +50,7 @@
 #ifndef _NC_QUEUE_H_
 #define _NC_QUEUE_H_
 
-#include <nc_log.h>
+#include "nc_log.h"
 
 #ifndef __offsetof
 #define __offsetof(type, field) ((size_t)(&((type *)NULL)->field))

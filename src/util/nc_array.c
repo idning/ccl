@@ -17,7 +17,7 @@
 
 #include <stdlib.h>
 
-#include <nc_core.h>
+#include "nc_core.h"
 
 struct array *
 array_create(uint32_t n, size_t size)

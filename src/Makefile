@@ -16,7 +16,7 @@ EXAMPLE_OBJ=$(UTIL_OBJ) example.o
 
 
 %.o: %.c 
-	$(CC) -c $(CFLAGS) $<
+	$(CC) -c -o $@ $(CFLAGS) $<
 
 $(EXAMPLE_BIN): $(EXAMPLE_OBJ)
 	$(LD) $(LDFLAGS) -o $@ $^ 
