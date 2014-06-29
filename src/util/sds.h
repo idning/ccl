@@ -36,6 +36,8 @@
 #include <sys/types.h>
 #include <stdarg.h>
 
+#include "nc_core.h"
+
 typedef char *sds;
 
 struct sdshdr {

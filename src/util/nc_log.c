@@ -22,7 +22,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#include <nc_core.h>
+#include "nc_core.h"
 
 static struct logger logger;
 

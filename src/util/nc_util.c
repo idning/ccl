@@ -31,7 +31,7 @@
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 
-#include <nc_core.h>
+#include "nc_core.h"
 
 #ifdef NC_HAVE_BACKTRACE
 # include <execinfo.h>

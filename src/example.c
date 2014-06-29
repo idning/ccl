@@ -12,7 +12,7 @@ typedef struct example_conf_s {
 
 } example_conf_t;
 
-int main(){
+int main(int argc, const char **argv) {
 
     return 0;
 }

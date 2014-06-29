@@ -18,7 +18,7 @@
 #ifndef _NC_CONNECTION_H_
 #define _NC_CONNECTION_H_
 
-#include <nc_core.h>
+#include "nc_core.h"
 
 typedef rstatus_t (*conn_recv_t)(struct context *, struct conn*);
 typedef struct msg* (*conn_recv_next_t)(struct context *, struct conn *, bool);
@@ -45,10 +45,10 @@ struct conn {
     socklen_t          addrlen;       /* socket length */
     struct sockaddr    *addr;         /* socket address (ref in server or server_pool) */
 
-    struct msg_tqh     imsg_q;        /* incoming request Q */
-    struct msg_tqh     omsg_q;        /* outstanding request Q */
-    struct msg         *rmsg;         /* current message being rcvd */
-    struct msg         *smsg;         /* current message being sent */
+    //struct msg_tqh     imsg_q;        [> incoming request Q <]
+    //struct msg_tqh     omsg_q;        [> outstanding request Q <]
+    //struct msg         *rmsg;         [> current message being rcvd <]
+    //struct msg         *smsg;         [> current message being sent <]
 
     conn_recv_t        recv;          /* recv (read) handler */
     conn_recv_next_t   recv_next;     /* recv next message handler */
@@ -59,13 +59,13 @@ struct conn {
     conn_close_t       close;         /* close handler */
     conn_active_t      active;        /* active? handler */
 
-    conn_ref_t         ref;           /* connection reference handler */
-    conn_unref_t       unref;         /* connection unreference handler */
+    //conn_ref_t         ref;           [> connection reference handler <]
+    //conn_unref_t       unref;         [> connection unreference handler <]
 
-    conn_msgq_t        enqueue_inq;   /* connection inq msg enqueue handler */
-    conn_msgq_t        dequeue_inq;   /* connection inq msg dequeue handler */
-    conn_msgq_t        enqueue_outq;  /* connection outq msg enqueue handler */
-    conn_msgq_t        dequeue_outq;  /* connection outq msg dequeue handler */
+    //conn_msgq_t        enqueue_inq;   [> connection inq msg enqueue handler <]
+    //conn_msgq_t        dequeue_inq;   [> connection inq msg dequeue handler <]
+    //conn_msgq_t        enqueue_outq;  [> connection outq msg enqueue handler <]
+    //conn_msgq_t        dequeue_outq;  [> connection outq msg dequeue handler <]
 
     size_t             recv_bytes;    /* received (read) bytes */
     size_t             send_bytes;    /* sent (written) bytes */

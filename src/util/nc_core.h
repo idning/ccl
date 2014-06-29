@@ -95,16 +95,18 @@ struct event_base;
 
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <netdb.h>
 #include <sys/un.h>
 #include <sys/time.h>
 #include <netinet/in.h>
 
 #include "nc_array.h"
-//#include "nc_string.h"
+#include "nc_string.h"
 #include "nc_queue.h"
 #include "nc_log.h"
 #include "nc_util.h"
 #include "nc_event.h"
+#include "nc_connection.h"
 
 struct context {
     uint32_t           id;          /* unique context id */

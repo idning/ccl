@@ -18,8 +18,8 @@
 #include <stdlib.h>
 #include <signal.h>
 
-#include <nc_core.h>
-#include <nc_signal.h>
+#include "nc_core.h"
+#include "nc_signal.h"
 
 static struct signal signals[] = {
     { SIGUSR1, "SIGUSR1", 0,                 signal_handler },
@@ -28,7 +28,7 @@ static struct signal signals[] = {
     { SIGTTOU, "SIGTTOU", 0,                 signal_handler },
     { SIGHUP,  "SIGHUP",  0,                 signal_handler },
     { SIGINT,  "SIGINT",  0,                 signal_handler },
-    { SIGSEGV, "SIGSEGV", (int)SA_RESETHAND, signal_handler },
+    /* { SIGSEGV, "SIGSEGV", (int)SA_RESETHAND, signal_handler }, TODO*/
     { SIGPIPE, "SIGPIPE", 0,                 SIG_IGN },
     { 0,        NULL,     0,                 NULL }
 };

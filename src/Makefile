@@ -1,9 +1,11 @@
 
 
-CFLAGS=-std=c99 -pedantic -Wall -O0 -g -ggdb 
+LD=$(CC)
+
+CFLAGS=-std=c99 -pedantic -Wall -O0 -g -ggdb -D_POSIX_C_SOURCE -D_GNU_SOURCE
 CFLAGS+= -I../deps/lua/src
 
-LDFLAGS=-g -ggdb
+LDFLAGS=-g -ggdb -rdynamic
 LDFLAGS+= -lm 
 LDFLAGS+= ../deps/lua/src/liblua.a
 

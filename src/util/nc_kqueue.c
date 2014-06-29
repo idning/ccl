@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-#include <nc_core.h>
+#include "nc_core.h"
 
 #ifdef NC_HAVE_KQUEUE
 
