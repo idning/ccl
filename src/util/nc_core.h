@@ -79,6 +79,8 @@ struct instance;
 #include "nc_event.h"
 #include "nc_connection.h"
 
+#include "nc_conf.h"
+
 struct context {
     uint32_t           id;          /* unique context id */
     struct conf        *cf;         /* configuration */

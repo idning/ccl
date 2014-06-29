@@ -140,6 +140,12 @@ libuv
 libev
 自己实现
 
+makefile
+========
+
+redis 和lua 都是手写makefile
+
+
 malloc
 ======
 

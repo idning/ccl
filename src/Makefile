@@ -2,12 +2,13 @@
 
 LD=$(CC)
 
-CFLAGS=-std=c99 -pedantic -Wall -O0 -g -ggdb -D_POSIX_C_SOURCE -D_GNU_SOURCE
-CFLAGS+= -I../deps/lua/src
+CFLAGS=-std=c99 -pedantic -Wall -O0 -g -ggdb -D_POSIX_C_SOURCE -D_GNU_SOURCE 
+CFLAGS+= -I../deps/lua/src -I./util/
 
 LDFLAGS=-g -ggdb -rdynamic
-LDFLAGS+= -lm 
-LDFLAGS+= ../deps/lua/src/liblua.a
+
+LDLIBS= -lm -ldl
+LDLIBS+= ../deps/lua/src/liblua.a
 
 UTIL_SRC=$(wildcard util/*.c)
 UTIL_OBJ=$(patsubst %.c,%.o,$(UTIL_SRC) )
@@ -21,7 +22,7 @@ KV_OBJ=$(UTIL_OBJ) kv.o
 	$(CC) -c -o $@ $(CFLAGS) $<
 
 $(KV_BIN): $(KV_OBJ)
-	$(LD) $(LDFLAGS) -o $@ $^ 
+	$(LD) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 all: $(KV_BIN)
 	echo "done"
