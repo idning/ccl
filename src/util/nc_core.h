@@ -18,10 +18,6 @@
 #ifndef _NC_CORE_H_
 #define _NC_CORE_H_
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
-
 #ifdef HAVE_DEBUG_LOG
 # define NC_DEBUG_LOG 1
 #endif
@@ -32,26 +28,6 @@
 
 #ifdef HAVE_ASSERT_LOG
 # define NC_ASSERT_LOG 1
-#endif
-
-#ifdef HAVE_STATS
-# define NC_STATS 1
-#else
-# define NC_STATS 0
-#endif
-
-#ifdef __linux__
-# define NC_HAVE_EPOLL 1
-#elif (defined(__APPLE__) && defined(MAC_OS_X_VERSION_10_6)) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined (__NetBSD__)
-# define NC_HAVE_KQUEUE 1
-#elif defined(__sun)
-# define NC_HAVE_EVENT_PORTS 1
-#else
-# error missing scalable I/O event notification mechanism
-#endif
-
-#ifdef HAVE_LITTLE_ENDIAN
-# define NC_LITTLE_ENDIAN 1
 #endif
 
 #ifdef HAVE_BACKTRACE
@@ -71,16 +47,11 @@ struct string;
 struct context;
 struct conn;
 struct conn_tqh;
-struct msg;
-struct msg_tqh;
-struct server;
-struct server_pool;
 struct mbuf;
 struct mhdr;
 struct conf;
 struct stats;
 struct instance;
-struct event_base;
 
 #include <stddef.h>
 #include <stdint.h>
@@ -139,5 +110,6 @@ struct context *core_start(struct instance *nci);
 void core_stop(struct context *ctx);
 rstatus_t core_core(void *arg, uint32_t events);
 rstatus_t core_loop(struct context *ctx);
+
 
 #endif

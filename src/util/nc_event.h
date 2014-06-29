@@ -20,6 +20,17 @@
 
 #include "nc_core.h"
 
+/* select event implement */
+#ifdef __linux__
+# define NC_HAVE_EPOLL 1
+#elif (defined(__APPLE__) && defined(MAC_OS_X_VERSION_10_6)) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined (__NetBSD__)
+# define NC_HAVE_KQUEUE 1
+#elif defined(__sun)
+# define NC_HAVE_EVENT_PORTS 1
+#else
+# error missing scalable I/O event notification mechanism
+#endif
+
 #define EVENT_SIZE  1024
 
 #define EVENT_READ  0x0000ff

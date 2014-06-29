@@ -12,27 +12,21 @@ LDFLAGS+= ../deps/lua/src/liblua.a
 UTIL_SRC=$(wildcard util/*.c)
 UTIL_OBJ=$(patsubst %.c,%.o,$(UTIL_SRC) )
 
-#example-server
-EXAMPLE_BIN=example-server
-EXAMPLE_OBJ=$(UTIL_OBJ) example.o
+#kv-server
+KV_BIN=kv-server
+KV_OBJ=$(UTIL_OBJ) kv.o
 
 
 %.o: %.c 
 	$(CC) -c -o $@ $(CFLAGS) $<
 
-$(EXAMPLE_BIN): $(EXAMPLE_OBJ)
+$(KV_BIN): $(KV_OBJ)
 	$(LD) $(LDFLAGS) -o $@ $^ 
 
-all: $(EXAMPLE_BIN)
-	echo $(EXAMPLE_OBJ)
-	#pass
-	
-test:
-	echo $(UTIL_SRC)
-	echo $(EXAMPLE_OBJ)
-	#pass
+all: $(KV_BIN)
+	echo "done"
 
 clean:
-	rm -rf $(EXAMPLE_BIN) 
+	rm -rf $(KV_BIN) 
 	rm -rf *.o *.gcda *.gcno *.gcov
 	rm -rf util/*.o 
