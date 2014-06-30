@@ -9,10 +9,10 @@
 rstatus_t
 nc_conf_init(nc_conf_t *conf, const char *filename)
 {
-    lua_State *L;
+    lua_State       *L;
 
     L = lua_open();   /* opens Lua */
-    if (L == NULL){
+    if (L == NULL) {
         goto fail;
     }
 
@@ -20,14 +20,14 @@ nc_conf_init(nc_conf_t *conf, const char *filename)
 
     if (luaL_loadfile(L, filename)) {
         log_stderr("luaL_loadfile on %s failed: %s",
-                            filename, lua_tostring(L, -1));
+                   filename, lua_tostring(L, -1));
         lua_pop(L, 1);
         goto fail;
     }
 
     if (lua_pcall(L, 0, 0, 0)) {
         log_stderr("lua_pcall on %s failed: %s",
-                            filename, lua_tostring(L, -1));
+                   filename, lua_tostring(L, -1));
         lua_pop(L, 1);
         goto fail;
     }
@@ -59,8 +59,8 @@ nc_conf_deinit(nc_conf_t *conf)
 static int
 _lua_eval(lua_State *L, const char *expr)
 {
-    char *buf;
-    int status;
+    char       *buf;
+    int         status;
 
     buf = nc_alloc(strlen(expr) + sizeof("return "));
     strcpy(buf, "return ");
@@ -92,12 +92,12 @@ out:
 char *
 nc_conf_get_str(nc_conf_t *conf, const char *name, char *default_value)
 {
-    const char          *str;
-    size_t              str_len;
-    rstatus_t           status;
-    char * ret;
+    const char       *str;
+    size_t            str_len;
+    rstatus_t         status;
+    char             *ret;
 
-    lua_State *L = conf->L;
+    lua_State        *L = conf->L;
 
     status = _lua_eval(L, name);
     if (status) {
@@ -124,10 +124,10 @@ out:
 int
 nc_conf_get_num(nc_conf_t *conf, const char *name, int default_value)
 {
-    rstatus_t           status;
-    int ret;
+    rstatus_t        status;
+    int              ret;
 
-    lua_State *L = conf->L;
+    lua_State       *L = conf->L;
 
     status = _lua_eval(L, name);
     if (status) {
