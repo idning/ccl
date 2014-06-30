@@ -1,5 +1,3 @@
-
-
 LD=$(CC)
 
 CFLAGS=-std=c99 -pedantic -Wall -O0 -g -ggdb -D_POSIX_C_SOURCE -D_GNU_SOURCE 
@@ -13,21 +11,49 @@ LDLIBS+= ../deps/lua/src/liblua.a
 UTIL_SRC=$(wildcard util/*.c)
 UTIL_OBJ=$(patsubst %.c,%.o,$(UTIL_SRC) )
 
-#kv-server
-KV_BIN=kv-server
-KV_OBJ=$(UTIL_OBJ) kv.o
-
+all: bin
+	echo "done"
 
 %.o: %.c 
 	$(CC) -c -o $@ $(CFLAGS) $<
 
+clean:
+	rm -rf $(ALL_BIN) 
+	rm -rf *.o *.gcda *.gcno *.gcov
+	find . -name *.o | xargs rm -f
+
+#kv-server
+KV_BIN=kv-server
+KV_OBJ=$(UTIL_OBJ) kv.o
 $(KV_BIN): $(KV_OBJ)
 	$(LD) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-all: $(KV_BIN)
-	echo "done"
+#test-conf
+TEST_CONF_BIN=test_conf
+TEST_CONF_OBJ=$(UTIL_OBJ) test/test_conf.o
+$(TEST_CONF_BIN): $(TEST_CONF_OBJ)
+	$(LD) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-clean:
-	rm -rf $(KV_BIN) 
-	rm -rf *.o *.gcda *.gcno *.gcov
-	rm -rf util/*.o 
+#test-array
+TEST_ARRAY_BIN=test_array
+TEST_ARRAY_OBJ=$(UTIL_OBJ) test/test_array.o
+$(TEST_ARRAY_BIN): $(TEST_ARRAY_OBJ)
+	$(LD) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+#test-event
+TEST_EVENT_BIN=test_event
+TEST_EVENT_OBJ=$(UTIL_OBJ) test/test_event.o
+$(TEST_EVENT_BIN): $(TEST_EVENT_OBJ)
+	$(LD) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+#summary
+ALL_BIN=$(KV_BIN) $(TEST_CONF_BIN) $(TEST_ARRAY_BIN) $(TEST_EVENT_BIN)
+bin: $(ALL_BIN)
+
+test:
+	for number in $(ALL_BIN) ; do \
+		echo $$number ; \
+		./$$number ; \
+	done
+
+.PHONY: test

@@ -26,3 +26,6 @@ tags
 
 *.log
 kv-server
+test_array
+test_conf
+test_event

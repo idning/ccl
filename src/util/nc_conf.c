@@ -81,8 +81,9 @@ _lua_eval(lua_State *L, const char *expr)
 
     if (lua_isnil(L, -1)) {
         log_stderr("nc_conf: value is nil: %s", expr);
+        status = NC_ERROR;
     }
-    status = 0;
+    status = NC_OK;
 
 out:
     nc_free(buf);
@@ -92,11 +93,8 @@ out:
 char *
 nc_conf_get_str(nc_conf_t *conf, const char *name, char *default_value)
 {
-    const char       *str;
-    size_t            str_len;
     rstatus_t         status;
     char             *ret;
-
     lua_State        *L = conf->L;
 
     status = _lua_eval(L, name);
@@ -113,8 +111,7 @@ nc_conf_get_str(nc_conf_t *conf, const char *name, char *default_value)
         goto out;
     }
 
-    str = lua_tolstring(conf->L, -1, &str_len);
-    ret = strndup(str, str_len);
+    ret = lua_tostring(conf->L, -1);
 
 out:
     lua_pop(L, lua_gettop(L));
@@ -126,7 +123,6 @@ nc_conf_get_num(nc_conf_t *conf, const char *name, int default_value)
 {
     rstatus_t        status;
     int              ret;
-
     lua_State       *L = conf->L;
 
     status = _lua_eval(L, name);
@@ -148,6 +144,5 @@ out:
     lua_pop(L, lua_gettop(L));
     return ret;
 }
-
 
 /* vim: set expandtab ts=4 sw=4 sts=4 tw=100: */

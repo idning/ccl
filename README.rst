@@ -23,7 +23,7 @@ config
 
 1. 需要支持int/string/array
 2. 支持名字空间 a.b
-
+3. 支持default
 
 - moosefs: 方便
     - 缺点: 只支持key=v格式, 不支持数组等
