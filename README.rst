@@ -22,6 +22,7 @@ config
 ------
 
 1. 需要支持int/string/array
+2. 支持名字空间 a.b
 
 
 - moosefs: 方便
@@ -32,11 +33,44 @@ config
 - 用lemon/ragel解析
     - ragel 不错, 灵活.
 - 用lua
-    - 不错
+    - 更不错
     - http://www.netbsd.org/~mbalmer/lua/lua_config.pdf
-    - https://github.com/portl4t/luaconf
+
     - c++ 用起来会很方便: https://github.com/tynril/luadata/
     - 也是c++的LuaTable++: http://www.fysx.org/2013/10/16/using-lua-scripts-as-config-files-from-c/
+
+    - 这两个不错:
+        - https://github.com/portl4t/luaconf     这个用了很多c代码, 用起来也比较复杂
+        - https://github.com/mrschyte/luaconf   这个利用了lua的eval, 用起来简单
+
+portl4t/luaconf
+```````````````
+要拿到一个值需要2步::
+
+    inst = luaconf_init("conf.lua");
+
+    elt1 = luaconf_getElt(inst, "site1.domain", sizeof("site1.domain")-1);
+    luaconf_getStr(elt1, buf, sizeof(buf), &size);
+
+    printf("site1.domain = %.*s\n", size, buf);          // www.taobao.com
+
+mrschyte/luaconf
+````````````````
+
+::
+
+    void process_config(lua_State* L) {
+        printf("float_value: %f\n", lua_evalexpr(L, lua_tonumber, "luaconf.config.float_value"));
+        printf("integer_value: %d\n", lua_evalexpr(L, lua_tointeger, "luaconf.config.integer_value"));
+        printf("string_value: %s\n", lua_evalexpr(L, lua_tocstring, "luaconf.config.string_value"));
+
+        int length = lua_evalexpr(L, lua_tointeger, "#luaconf.config.integer_array");
+        printf("integer_array:\n");
+
+        for (int i = 0; i < length; i++) {
+            printf("  %d\n", lua_evalexpr(L, lua_tointeger, "luaconf.config.integer_array[%d]", i + 1));
+        }
+    }
 
 LuaTable++
 ``````````
@@ -69,8 +103,8 @@ LuaTable++
     - 简单kv, 使用mfs
     - 复杂点, 用lua.
 
-lua 做config
-````````````
+我的想法
+````````
 
 ::
 
@@ -80,6 +114,7 @@ lua 做config
     }
 
 两个方法
+
 1. c程序通过cfg_get_str() 从LuaState获取值
 2. c定义一个config struct, lua中来修改这些值.
 
