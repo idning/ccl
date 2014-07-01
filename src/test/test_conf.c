@@ -69,7 +69,7 @@ clean()
 {
     char        buf[1024];
 
-    snprintf(buf, sizeof(buf), "rm %s", conf_filename);
+    snprintf(buf, sizeof(buf), "rm %s", config_file);
     system(buf);
 }
 
