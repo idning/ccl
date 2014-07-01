@@ -36,9 +36,9 @@ TEST_CONF_OBJ=$(UTIL_OBJ) test/test_conf.o
 $(TEST_CONF_BIN): $(TEST_CONF_OBJ)
 	$(LD) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-#test-array
-TEST_ARRAY_BIN=test_array
-TEST_ARRAY_OBJ=$(UTIL_OBJ) test/test_array.o
+#test-misc
+TEST_ARRAY_BIN=test_misc
+TEST_ARRAY_OBJ=$(UTIL_OBJ) test/test_misc.o
 $(TEST_ARRAY_BIN): $(TEST_ARRAY_OBJ)
 	$(LD) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
