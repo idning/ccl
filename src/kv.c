@@ -35,11 +35,11 @@ int main(int argc, const char **argv) {
         return -1;
     }
 
-    server.ip = nc_conf_get_str(&server.conf, "ip", "0.0.0.0");
+    server.ip = strdup(nc_conf_get_str(&server.conf, "ip", "0.0.0.0"));
     server.port = nc_conf_get_num(&server.conf, "port", 1000);
 
     server.tcp_timeout = nc_conf_get_num(&server.conf, "tcp.timeout", 100);
-    server.tcp_name = nc_conf_get_str(&server.conf, "tcp.name", "dummy-name");
+    server.tcp_name = strdup(nc_conf_get_str(&server.conf, "tcp.name", "dummy-name"));
 
     log_stderr("start with ip:%s, port:%d, tcp_timeout:%d tcp_name:%s", server.ip, server.port, server.tcp_timeout, server.tcp_name);
 
@@ -48,7 +48,7 @@ int main(int argc, const char **argv) {
     log_stderr("tcp.blacklist cnt: %d", cnt);
     for (i=1; i<=cnt; i++) {
         snprintf(namebuf, sizeof(namebuf), "tcp.blacklist[%d]", i);
-        s = nc_conf_get_str(&server.conf, namebuf, NULL);
+        s = strdup(nc_conf_get_str(&server.conf, namebuf, NULL));
         log_stderr("tcp.blacklist[%d]: %s", i, s);
 
     }

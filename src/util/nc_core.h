@@ -54,6 +54,7 @@ struct stats;
 struct instance;
 
 #include <stddef.h>
+#include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <inttypes.h>
@@ -72,6 +73,7 @@ struct instance;
 #include <netinet/in.h>
 
 #include "nc_array.h"
+#include "nc_rbtree.h"
 #include "nc_string.h"
 #include "nc_queue.h"
 #include "nc_log.h"

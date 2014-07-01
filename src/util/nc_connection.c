@@ -77,9 +77,6 @@
  * the queue.
  */
 
-static uint32_t nfree_connq;       /* # free conn q */
-static struct conn_tqh free_connq; /* free conn q */
-
 /*
  * Return the context associated with this connection.
  */

@@ -21,7 +21,7 @@ typedef struct nc_conf_s {
 rstatus_t nc_conf_init(nc_conf_t *conf, const char *filename);
 rstatus_t nc_conf_deinit(nc_conf_t *conf);
 
-char *nc_conf_get_str(nc_conf_t *conf, const char *name, char *default_v);
+const char *nc_conf_get_str(nc_conf_t *conf, const char *name, char *default_v);
 int nc_conf_get_num(nc_conf_t *conf, const char *name, int default_v);
 
 #endif

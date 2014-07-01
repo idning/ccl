@@ -90,11 +90,11 @@ out:
     return status;
 }
 
-char *
+const char *
 nc_conf_get_str(nc_conf_t *conf, const char *name, char *default_value)
 {
     rstatus_t         status;
-    char             *ret;
+    const char       *ret;
     lua_State        *L = conf->L;
 
     status = _lua_eval(L, name);
