@@ -12,8 +12,9 @@ static const char       *log_file = "/tmp/test_log.log";
 void
 clean()
 {
-    char buf[1024];
-    snprintf(buf, sizeof(buf), "rm %s", log_file);;;;
+    char        buf[1024];
+
+    snprintf(buf, sizeof(buf), "rm %s", log_file);
     system(buf);
 }
 
@@ -24,9 +25,9 @@ str_count(const char *haystack, const char *needle)
     int         cnt = 0;
     int         needle_len = strlen(needle);
 
-    for (;*p; p++) {
-        if(0 == strncmp(needle, p, needle_len))
-            cnt ++;
+    for (; *p; p++) {
+        if (0 == strncmp(needle, p, needle_len))
+            cnt++;
     }
     return cnt;
 }

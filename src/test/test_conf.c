@@ -67,7 +67,10 @@ test_notexist_conf()
 void
 clean()
 {
-    system("rm /tmp/test_conf.conf");
+    char        buf[1024];
+
+    snprintf(buf, sizeof(buf), "rm %s", conf_filename);
+    system(buf);
 }
 
 int
